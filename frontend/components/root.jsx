@@ -5,29 +5,28 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 import App from './app';
 import SessionFormContainer from './session/session_form_container';
-import GreetingContainer from './greeting/greeting_container';
 
 const Root = ({ store }) => {
-  // const _ensureLoggedIn = (nextState, replace) => {
-  //   const currentUser = store.getState().session.currentUser;
-  //   if (!currentUser) {
-  //     replace('login');
-  //   }
-  // };
-  //
-  // const _redirectIfLoggedIn = (nextState, replace) => {
-  //   const currentUser = store.getState().session.currentUser;
-  //   if (currentUser) {
-  //     replace('/search');
-  //   }
-  // };
-  //
-  // const _goToSearchIfLoggedIn = (nextState, replace) => {
-  //   const currentUser = store.getState().session.currentUser;
-  //   if (currentUser) {
-  //     replace('search');
-  //   }
-  // };
+  const _ensureLoggedIn = (nextState, replace) => {
+    const currentUser = store.getState().session.currentUser;
+    if (!currentUser) {
+      replace('login');
+    }
+  };
+
+  const _redirectIfLoggedIn = (nextState, replace) => {
+    const currentUser = store.getState().session.currentUser;
+    if (currentUser) {
+      replace('/search');
+    }
+  };
+
+  const _goToSearchIfLoggedIn = (nextState, replace) => {
+    const currentUser = store.getState().session.currentUser;
+    if (currentUser) {
+      replace('search');
+    }
+  };
 
   return (
     <Provider store={ store }>
