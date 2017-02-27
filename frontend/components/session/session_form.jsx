@@ -27,7 +27,7 @@ class SessionForm extends React.Component {
     e.preventDefault();
     const user = this.state;
     this.props.processForm({user})
-      .then(() => this.redirect('search')
+      .then(() => this.redirect('/')
     );
   }
 
@@ -60,6 +60,7 @@ class SessionForm extends React.Component {
   }
 
   openModal() {
+    this.redirect('/')
     this.setState({ modalOpen: true });
   }
 
@@ -73,7 +74,7 @@ class SessionForm extends React.Component {
       if (counter === username.length) {
         this.setState({ password });
         clearInterval(animation);
-        this.props.login({user: {username, password} }).then(() => this.redirect('search'));
+        this.props.login({user: {username, password} }).then(() => this.redirect('/'));
       }
     };
     const animation = setInterval(typer, 70);
@@ -84,7 +85,6 @@ class SessionForm extends React.Component {
     return(
       <div className="main">
         <div id='greeting'>
-          <Link className='welcome' to='login' onClick={this.openModal}>ENTER SITE</Link>
           {this.renderErrors()}
           <Modal
             isOpen={this.state.modalOpen}
