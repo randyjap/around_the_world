@@ -27,8 +27,8 @@ const Root = ({ store }) => {
 
   const setSocket = roomName => {
     window.App.channel = window.App.cable.subscriptions.create({
-      channel: 'ChannelChannel',
-      channel_name: roomName
+      channel: 'RoomChannel',
+      room_name: roomName
     }, {
       received: data => {
         store.dispatch(receiveMessage(data));

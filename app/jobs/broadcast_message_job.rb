@@ -7,7 +7,7 @@ class BroadcastMessageJob < ApplicationJob
       locals: { message: message }
     )
     ActionCable.server.broadcast(
-      "channel_#{message.room.name}", JSON.parse(parsed_message)
+      "room_#{message.room.name}", JSON.parse(parsed_message)
     )
   end
 end
