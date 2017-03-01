@@ -3,12 +3,31 @@
   bottom: 0px;
 }
 
+.message {
+  right: 0px;
+  margin: 10px;
+  margin-top: 1px;
+}
+
 .messages {
+  margin-bottom: 70px;
+}
+
+.middle {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+}
+
+.middle-left {
+  width: 200px;
+}
+
+.middle-right {
   position: absolute;
-  bottom: 50px;
-  width: 100%;
-  top: 0px;
-  overflow-y: scroll;
+  left: 200px;
+  right: 10px;
 }
 
 //Transition Group

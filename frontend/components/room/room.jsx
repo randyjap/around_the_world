@@ -9,7 +9,9 @@ import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bu
 import { Card, CardHeader, CardText } from 'material-ui/Card';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import TimeAgo from 'react-timeago';
-
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+import RaisedButton from 'material-ui/RaisedButton';
 // Needed for onTouchTap
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
@@ -21,6 +23,8 @@ class Room extends React.Component{
     this._handleKeyPress = this._handleKeyPress.bind(this);
     this.logChangeInput = this.logChangeInput.bind(this);
     this.postMessage = this.postMessage.bind(this);
+    this.redirect = this.redirect.bind(this);
+
   }
 
   componentDidUpdate(nextState) {
@@ -34,8 +38,7 @@ class Room extends React.Component{
   }
 
   scrollToBottom() {
-    const height = this.refs.messages.scrollHeight;
-    this.refs.messages.scrollTop = height;
+    $("html, body").animate({ scrollTop: $(document).height()-$(window).height() }, 500);
   }
 
   _handleKeyPress(e){
@@ -58,6 +61,10 @@ class Room extends React.Component{
         room: this.props.routeParams.room
       }
     );
+  }
+
+  redirect(route){
+    this.props.router.replace(route);
   }
 
   render(){
@@ -83,24 +90,37 @@ class Room extends React.Component{
 
     return (
       <div className="room">
-        <h1>{this.props.routeParams.roomName}</h1>
-          <ReactCSSTransitionGroup
-            transitionName="message"
-            transitionEnterTimeout={500}
-            transitionLeaveTimeout={300}>
-            <div className="messages" ref="messages">
-              {messages}
-            </div>
-          </ReactCSSTransitionGroup>
-        <TextField
-          fullWidth={true}
-          floatingLabelText={"Enter message..."}
-          className="message-input-field"
-          value={this.state.body}
-          onChange={this.logChangeInput("body")}
-          onKeyPress={this._handleKeyPress}
-          multiLine={false}
-        />
+        <div className="middle">
+          <div className="middle-left">
+            <Drawer width={200} open={true}>
+              <Subheader>Welcome to {this.props.routeParams.room}</Subheader>
+              <MenuItem onTouchTap={() => this.redirect("rooms/Tolos")}>Tolos</MenuItem>
+              <MenuItem onTouchTap={() => this.redirect("rooms/Tyrosh")}>Tyrosh</MenuItem>
+            </Drawer>
+          </div>
+          <div className="middle-right">
+            <ReactCSSTransitionGroup
+              transitionName="message"
+              transitionEnterTimeout={500}
+              transitionLeaveTimeout={300}
+            >
+              <div className="messages" ref="messages">
+                {messages}
+              </div>
+            </ReactCSSTransitionGroup>
+            <TextField
+              floatingLabelText={"Enter message..."}
+              className="message-input-field"
+              value={this.state.body}
+              onChange={this.logChangeInput("body")}
+              onKeyPress={this._handleKeyPress}
+              multiLine={false}
+              style={{marginLeft: 10}}
+            />
+          </div>
+        </div>
+        <div className="bottom">
+        </div>
       </div>
     );
   }

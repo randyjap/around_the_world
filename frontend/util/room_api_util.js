@@ -1,21 +1,14 @@
-export const getRooms = (directMessage, success) => (
+export const getRooms = () => (
   $.ajax({
-    method: 'GET'
-    url: '/api/channels',
+    method: 'GET',
+    url: '/api/rooms',
   })
 );
 
-export const getRoom = id => (
-  $.ajax({
-    method: 'GET'
-    url: `/api/channels/${id}`,
-  })
-);
-
-export const postRoom = room => (
-  $.ajax({
-    method: 'POST',
-    url: '/api/channels',
-    data: {room}
-  })
-);
+// export const postRoom = room => (
+//   $.ajax({
+//     method: 'POST',
+//     url: '/api/rooms',
+//     data: {room}
+//   })
+// );

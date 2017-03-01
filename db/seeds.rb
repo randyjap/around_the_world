@@ -19,7 +19,6 @@ end
 
 User.all.each do |user|
   Room.all.each do |room|
-    next if user.id == room.moderator_id
     RoomMembership.create!(
       guest: user,
       room: room

@@ -3,6 +3,5 @@
   json.set! message.id do
     json.extract! message, :id, :body, :created_at
     json.set! :author, message.author.username
-
   end
 end
