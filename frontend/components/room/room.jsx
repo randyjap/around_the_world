@@ -60,7 +60,7 @@ class Room extends React.Component{
 
     return (
       <div className="room">
-        <h1>Room</h1>
+        <h1>{this.props.routeParams.roomName}</h1>
           <ReactCSSTransitionGroup
             transitionName="message"
             transitionEnterTimeout={500}
