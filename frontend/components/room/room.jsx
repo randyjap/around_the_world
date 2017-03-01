@@ -8,6 +8,8 @@ import Divider from 'material-ui/Divider';
 import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
 import { Card, CardHeader, CardText } from 'material-ui/Card';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import TimeAgo from 'react-timeago';
+
 // Needed for onTouchTap
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
@@ -52,8 +54,8 @@ class Room extends React.Component{
         return (
           <Card className="message" key={message.id}>
             <CardHeader
-              title="Author"
-              subtitle="Posted at xx"
+              title={message.author}
+              subtitle={<TimeAgo date={message.created_at} />}
               avatar={<Avatar src="http://www.randyjap.com/images/avatar.jpg" />}
             />
             <CardText>
