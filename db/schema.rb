@@ -16,23 +16,29 @@ ActiveRecord::Schema.define(version: 20170228013655) do
   enable_extension "plpgsql"
 
   create_table "messages", force: :cascade do |t|
-    t.integer "author_id", null: false
-    t.integer "room_id",   null: false
-    t.text    "message",   null: false
+    t.integer  "author_id",  null: false
+    t.integer  "room_id",    null: false
+    t.text     "message",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_messages_on_author_id", using: :btree
     t.index ["room_id"], name: "index_messages_on_room_id", using: :btree
   end
 
   create_table "room_memberships", force: :cascade do |t|
-    t.integer "room_id",  null: false
-    t.integer "guest_id", null: false
+    t.integer  "room_id",    null: false
+    t.integer  "guest_id",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["guest_id"], name: "index_room_memberships_on_guest_id", using: :btree
     t.index ["room_id"], name: "index_room_memberships_on_room_id", using: :btree
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.string  "name",         null: false
-    t.integer "moderator_id", null: false
+    t.string   "name",         null: false
+    t.integer  "moderator_id", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.index ["moderator_id"], name: "index_rooms_on_moderator_id", using: :btree
   end
 
