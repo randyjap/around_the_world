@@ -14,7 +14,15 @@ export const receiveRooms = rooms => ({
 });
 
 export const getRooms = () => dispatch => {
-  return MessageAPIUtil.getRooms()
+  return RoomAPIUtil.getRooms()
   .then(rooms => dispatch(receiveRooms(rooms)))
   .fail(errors => console.log(errors));
 };
+
+export const postRoom = room => dispatch => {
+  return RoomAPIUtil.postRoom(room);
+};
+
+
+//TODO
+window.postRoom = postRoom;

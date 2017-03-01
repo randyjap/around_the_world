@@ -6,8 +6,8 @@ import SessionFormContainer from './session/session_form_container';
 import GreetingContainer from './greeting/greeting_container';
 import RoomContainer from './room/room_container';
 import Rooms from './room/rooms';
-import { fetchRooms, receiveRooms } from '../actions/room_actions';
-import { receiveMessage, getMessages } from '../actions/message_actions';
+import { getRooms, receiveRoom } from '../actions/room_actions';
+import { getMessages, receiveMessage } from '../actions/message_actions';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const Root = ({ store }) => {
@@ -25,7 +25,7 @@ const Root = ({ store }) => {
     }
   };
 
-  const setRoomSocket = room => {
+  const setMessageSocket = room => {
     window.App.channel = window.App.cable.subscriptions.create({
       channel: 'RoomChannel',
       room_name: room
@@ -36,13 +36,15 @@ const Root = ({ store }) => {
     });
   }
 
-  const setRoomsSocket = () => {
+  const setRoomSocket = () => {
     window.App.roomNames = window.App.cable.subscriptions.create({
       channel: 'RoomsChannel',
       room_name: "AllRooms"
     }, {
       received: data => {
-        store.dispatch(receiveRooms(data));
+        store.dispatch(receiveRoom(data));
+        console.log("received something");
+        console.log(data);
       }
     });
   }
@@ -53,14 +55,14 @@ const Root = ({ store }) => {
     if (window.App.channel) {
       window.App.cable.subscriptions.remove(window.App.channel);
     }
-    setRoomSocket(room);
+    setMessageSocket(room);
 
     //Get all room names
-    store.dispatch(fetchRooms());
+    store.dispatch(getRooms());
     if (window.App.roomNames) {
       window.App.cable.subscriptions.remove(window.App.roomNames);
     }
-    setRoomsSocket();
+    setRoomSocket();
   }
 
   return (

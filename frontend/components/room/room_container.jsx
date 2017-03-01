@@ -4,7 +4,7 @@ import { postMessage } from '../../actions/message_actions';
 
 const mapStateToProps = state => ({
   messages: state.currentRoom.messages,
-  currentRoom: state.currentRoom.room
+  rooms: state.rooms
 });
 
 const mapDispatchToProps = dispatch => ({

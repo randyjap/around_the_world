@@ -6,4 +6,6 @@ class Room < ApplicationRecord
   has_many :room_memberships
   has_many :guests, through: :room_memberships
   has_many :messages
+
+  after_commit { BroadcastRoomJob.perform_later(self) }
 end

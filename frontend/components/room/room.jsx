@@ -27,7 +27,7 @@ class Room extends React.Component{
 
   }
 
-  componentDidUpdate(nextState) {
+  componentDidUpdate(nextState){
     if (nextState.messages) {
       let after = Object.keys(nextState.messages).length;
       let before = Object.keys(this.props.messages).length;
@@ -37,7 +37,7 @@ class Room extends React.Component{
     }
   }
 
-  scrollToBottom() {
+  scrollToBottom(){
     $("html, body").animate({ scrollTop: $(document).height()-$(window).height() }, 500);
   }
 
@@ -88,14 +88,25 @@ class Room extends React.Component{
       })
     }
 
+    let rooms = this.props.rooms;
+    if (rooms === null) {
+    } else {
+      rooms = Object.keys(rooms).map(key => rooms[key]);
+      rooms = rooms.map(room => {
+        return (
+          <MenuItem key={room.id} onTouchTap={() => this.redirect(`rooms/${room.name}`)}>{room.name}</MenuItem>
+        );
+      })
+    }
+
+
     return (
       <div className="room">
         <div className="middle">
           <div className="middle-left">
             <Drawer width={200} open={true}>
               <Subheader>Welcome to {this.props.routeParams.room}</Subheader>
-              <MenuItem onTouchTap={() => this.redirect("rooms/Tolos")}>Tolos</MenuItem>
-              <MenuItem onTouchTap={() => this.redirect("rooms/Tyrosh")}>Tyrosh</MenuItem>
+              {rooms}
             </Drawer>
           </div>
           <div className="middle-right">

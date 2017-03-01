@@ -1,9 +1,7 @@
 import { RECEIVE_MESSAGE, RECEIVE_MESSAGES } from '../actions/message_actions';
 import merge from 'lodash/merge';
 
-const defaultState = {
-  messages: null
-};
+const defaultState = { messages: null };
 
 const roomDetailReducer = (state = defaultState, action) => {
   Object.freeze(state);

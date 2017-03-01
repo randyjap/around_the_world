@@ -5,10 +5,10 @@ export const getRooms = () => (
   })
 );
 
-// export const postRoom = room => (
-//   $.ajax({
-//     method: 'POST',
-//     url: '/api/rooms',
-//     data: {room}
-//   })
-// );
+export const postRoom = data => (
+  $.ajax({
+    method: 'POST',
+    url: '/api/rooms',
+    data
+  })
+);
