@@ -23,6 +23,21 @@ class Room extends React.Component{
     this.postMessage = this.postMessage.bind(this);
   }
 
+  componentDidUpdate(nextState) {
+    if (nextState.messages) {
+      let after = Object.keys(nextState.messages).length;
+      let before = Object.keys(this.props.messages).length;
+      if (after !== before) {
+        this.scrollToBottom();
+      }
+    }
+  }
+
+  scrollToBottom() {
+    const height = this.refs.messages.scrollHeight;
+    this.refs.messages.scrollTop = height;
+  }
+
   _handleKeyPress(e){
     if (e.key === 'Enter') {
       this.setState({ body: "" });
@@ -40,7 +55,7 @@ class Room extends React.Component{
     this.props.postMessage(
       {
         body: this.state.body,
-        room: this.props.routeParams.roomName
+        room: this.props.routeParams.room
       }
     );
   }
@@ -73,7 +88,9 @@ class Room extends React.Component{
             transitionName="message"
             transitionEnterTimeout={500}
             transitionLeaveTimeout={300}>
-            {messages}
+            <div className="messages" ref="messages">
+              {messages}
+            </div>
           </ReactCSSTransitionGroup>
         <TextField
           fullWidth={true}

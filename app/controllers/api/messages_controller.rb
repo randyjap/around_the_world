@@ -1,4 +1,9 @@
 class Api::MessagesController < ApplicationController
+  def index
+    room = Room.find_by(name: params[:room])
+    @messages = Message.where(room: room).includes(:author)
+  end
+
   def create
     user = User.first
     room = Room.find_by(name: params[:room])

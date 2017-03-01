@@ -7,7 +7,7 @@ import GreetingContainer from './greeting/greeting_container';
 import RoomContainer from './room/room_container';
 import Rooms from './room/rooms';
 import { fetchRooms, fetchRoom } from '../actions/room_actions';
-import { receiveMessage } from '../actions/message_actions';
+import { receiveMessage, getMessages } from '../actions/message_actions';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const Root = ({ store }) => {
@@ -25,10 +25,10 @@ const Root = ({ store }) => {
     }
   };
 
-  const setSocket = roomName => {
+  const setSocket = room => {
     window.App.channel = window.App.cable.subscriptions.create({
       channel: 'RoomChannel',
-      room_name: roomName
+      room_name: room
     }, {
       received: data => {
         store.dispatch(receiveMessage(data));
@@ -37,13 +37,12 @@ const Root = ({ store }) => {
   }
 
   const handleSocket = (nextState, replace) => {
-    let roomName = nextState.params.roomName;
-    store.dispatch(fetchRooms());
-    store.dispatch(fetchRoom(roomName));
+    let room = nextState.params.room;
+    store.dispatch(getMessages({room: room}));
     if (window.App.channel) {
       window.App.cable.subscriptions.remove(window.App.channel);
     }
-    setSocket(roomName);
+    setSocket(room);
   }
 
   return (
@@ -57,7 +56,7 @@ const Root = ({ store }) => {
             <Route path="room" component={ RoomContainer } />
           </Route>
           <Route path="/rooms" component={ Rooms }>
-            <Route path=":roomName" component={ RoomContainer } onEnter={ handleSocket.bind(this) }/>
+            <Route path=":room" component={ RoomContainer } onEnter={ handleSocket.bind(this) }/>
           </Route>
         </Router>
       </MuiThemeProvider>

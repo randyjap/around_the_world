@@ -3,6 +3,14 @@
   bottom: 0px;
 }
 
+.messages {
+  position: absolute;
+  bottom: 50px;
+  width: 100%;
+  top: 0px;
+  overflow-y: scroll;
+}
+
 //Transition Group
 .message-enter {
   opacity: 0.01;
