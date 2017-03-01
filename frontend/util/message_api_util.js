@@ -1,7 +1,7 @@
-export const postMessage = (message, success) => (
+export const postMessage = data => (
   $.ajax({
     method: 'POST',
     url: '/api/messages',
-    data: {message}
-  });
+    data
+  })
 );

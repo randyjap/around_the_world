@@ -35,23 +35,29 @@ class Room extends React.Component{
   }
 
   postMessage(){
-    this.state.messages.push(this.state.message);
+    this.props.postMessage(
+      {
+        message: this.state.message,
+        room: this.props.routeParams.roomName
+      }
+    );
   }
 
   render(){
-    let messages = this.state.messages;
-    if (messages.length == 0) {
+    let messages = this.props.messages;
+    if (messages === null) {
     } else {
+      messages = Object.keys(messages).map(key => messages[key]);
       messages = messages.map(message => {
         return (
-          <Card className="message" key={1}>
+          <Card className="message" key={message.id}>
             <CardHeader
               title="Author"
               subtitle="Posted at xx"
               avatar={<Avatar src="http://www.randyjap.com/images/avatar.jpg" />}
             />
             <CardText>
-              {message}
+              {message.message}
             </CardText>
           </Card>
         );

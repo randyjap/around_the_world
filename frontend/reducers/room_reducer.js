@@ -2,7 +2,7 @@ import {
   RECEIVE_ROOMS
 } from '../actions/room_actions';
 
-export default (state = {}, action) => {
+const roomReducer = (state = {}, action) => {
   Object.freeze(state);
   switch(action.type) {
     case RECEIVE_ROOMS:
@@ -11,3 +11,5 @@ export default (state = {}, action) => {
       return state;
   }
 };
+
+export default roomReducer;

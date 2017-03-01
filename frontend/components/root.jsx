@@ -33,7 +33,9 @@ const Root = ({ store }) => {
       connected: () => {},
       disconnected: () => {},
       received: (data) => {
-        store.dispatch(receiveMessage(data.message));
+        store.dispatch(receiveMessage(data));
+        console.log(data.message);
+        console.log("I received something..");
       }
     });
   }

@@ -7,14 +7,16 @@ const defaultState = {
   room: null
 };
 
-export default (state = defaultState, action) => {
+const roomDetailReducer = (state = defaultState, action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_ROOM:
       return merge({}, action.room);
     case RECEIVE_MESSAGE:
-      return merge({}, state, { messages: { [action.message.id]: action.message.message } });
+      return merge({}, state, { messages: { [action.message.id]: action.message } });
     default:
       return state;
   }
 };
+
+export default roomDetailReducer;
