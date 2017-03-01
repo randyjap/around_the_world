@@ -31,6 +31,6 @@ end
   Message.create!(
     author: User.find(rand(1..User.count)),
     room: Room.find(rand(1..Room.count)),
-    message: Faker::StarWars.quote
+    body: Faker::StarWars.quote
   )
 end

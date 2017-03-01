@@ -15,7 +15,7 @@ injectTapEventPlugin();
 class Room extends React.Component{
   constructor(props){
     super(props);
-    this.state = { message: "", messages: [] };
+    this.state = { body: "", messages: [] };
     this._handleKeyPress = this._handleKeyPress.bind(this);
     this.logChangeInput = this.logChangeInput.bind(this);
     this.postMessage = this.postMessage.bind(this);
@@ -23,7 +23,7 @@ class Room extends React.Component{
 
   _handleKeyPress(e){
     if (e.key === 'Enter') {
-      this.setState({ message: "" });
+      this.setState({ body: "" });
       this.postMessage();
     }
   }
@@ -37,7 +37,7 @@ class Room extends React.Component{
   postMessage(){
     this.props.postMessage(
       {
-        message: this.state.message,
+        body: this.state.body,
         room: this.props.routeParams.roomName
       }
     );
@@ -57,7 +57,7 @@ class Room extends React.Component{
               avatar={<Avatar src="http://www.randyjap.com/images/avatar.jpg" />}
             />
             <CardText>
-              {message.message}
+              {message.body}
             </CardText>
           </Card>
         );
@@ -77,8 +77,8 @@ class Room extends React.Component{
           fullWidth={true}
           floatingLabelText={"Enter message..."}
           className="message-input-field"
-          value={this.state.message}
-          onChange={this.logChangeInput("message")}
+          value={this.state.body}
+          onChange={this.logChangeInput("body")}
           onKeyPress={this._handleKeyPress}
           multiLine={false}
         />

@@ -27,15 +27,11 @@ const Root = ({ store }) => {
 
   const setSocket = roomName => {
     window.App.channel = window.App.cable.subscriptions.create({
-      channel: 'ChatChannel',
+      channel: 'ChannelChannel',
       channel_name: roomName
     }, {
-      connected: () => {},
-      disconnected: () => {},
-      received: (data) => {
+      received: data => {
         store.dispatch(receiveMessage(data));
-        console.log(data.message);
-        console.log("I received something..");
       }
     });
   }
