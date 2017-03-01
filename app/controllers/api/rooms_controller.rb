@@ -1,11 +1,12 @@
 class Api::RoomsController < ApplicationController
   def index
     # if current_user
-    if user = User.first
-      @rooms = user.rooms.includes(:moderator)
-    else
-      render json: ["you are not logged in"], status: 401
-    end
+    # if user = User.first
+    #   @rooms = user.rooms.includes(:moderator)
+    # else
+    #   render json: ["you are not logged in"], status: 401
+    # end
+    @rooms = Room.all
   end
 
   def create

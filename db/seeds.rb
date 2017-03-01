@@ -10,6 +10,11 @@ User.create!(
   )
 end
 
+Room.create!(
+  name: "General",
+  moderator: User.find(rand(1..User.count))
+)
+
 5.times do |i|
   Room.create!(
     name: Faker::GameOfThrones.city,

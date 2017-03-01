@@ -25,6 +25,10 @@ const Root = ({ store }) => {
     }
   };
 
+  const _redirectToGeneral = (nextState, replace) => {
+    replace('/rooms/General');
+  }
+
   const setMessageSocket = room => {
     window.App.channel = window.App.cable.subscriptions.create({
       channel: 'RoomChannel',
@@ -69,7 +73,7 @@ const Root = ({ store }) => {
     <Provider store={ store }>
       <MuiThemeProvider>
         <Router history={ hashHistory } onUpdate={() => window.scrollTo(0, 0)}>
-          <Route path="/" component={ App }>
+          <Route path="/" component={ App } onEnter={ _redirectToGeneral }>
             <IndexRoute component={ GreetingContainer } />
             <Route path="login" component={ SessionFormContainer } onEnter={ _redirectIfLoggedIn } />
             <Route path="signup" component={ SessionFormContainer } onEnter={ _redirectIfLoggedIn } />

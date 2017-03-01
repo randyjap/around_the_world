@@ -19,8 +19,9 @@ injectTapEventPlugin();
 class Room extends React.Component{
   constructor(props){
     super(props);
-    this.state = { body: "", messages: [] };
-    this._handleKeyPress = this._handleKeyPress.bind(this);
+    this.state = { body: "", name: "" };
+    this._handleInputKeyPress = this._handleInputKeyPress.bind(this);
+    this._handleRoomKeyPress = this._handleRoomKeyPress.bind(this);
     this.logChangeInput = this.logChangeInput.bind(this);
     this.postMessage = this.postMessage.bind(this);
     this.redirect = this.redirect.bind(this);
@@ -41,10 +42,19 @@ class Room extends React.Component{
     $("html, body").animate({ scrollTop: $(document).height()-$(window).height() }, 500);
   }
 
-  _handleKeyPress(e){
+  _handleInputKeyPress(e){
     if (e.key === 'Enter') {
-      this.setState({ body: "" });
       this.postMessage();
+      this.setState({ body: "" });
+    }
+  }
+
+  _handleRoomKeyPress(e){
+    if (e.key === 'Enter') {
+      let name = this.state.name;
+      this.setState({ name: "" });
+      this.props.postRoom({ name: name })
+        .then(() => this.redirect(`/rooms/${name}`));
     }
   }
 
@@ -69,7 +79,16 @@ class Room extends React.Component{
 
   render(){
     let messages = this.props.messages;
-    if (messages === null) {
+    if (messages === null || Object.keys(messages).length === 0) {
+      messages = (
+        <Card className="message">
+          <CardHeader
+            title={"No messages yet!"}
+          />
+          <CardText>
+          </CardText>
+        </Card>
+      )
     } else {
       messages = Object.keys(messages).map(key => messages[key]);
       messages = messages.map(message => {
@@ -90,6 +109,7 @@ class Room extends React.Component{
 
     let rooms = this.props.rooms;
     if (rooms === null) {
+      <MenuItem>No Rooms Yet!</MenuItem>
     } else {
       rooms = Object.keys(rooms).map(key => rooms[key]);
       rooms = rooms.map(room => {
@@ -107,6 +127,13 @@ class Room extends React.Component{
             <Drawer width={200} open={true}>
               <Subheader>Welcome to {this.props.routeParams.room}</Subheader>
               {rooms}
+              <TextField
+                style={{paddingLeft: "10px", width: "170px"}}
+                hintText="Create room..."
+                value={this.state.name}
+                onChange={this.logChangeInput("name")}
+                onKeyPress={this._handleRoomKeyPress}
+               />
             </Drawer>
           </div>
           <div className="middle-right">
@@ -124,7 +151,7 @@ class Room extends React.Component{
               className="message-input-field"
               value={this.state.body}
               onChange={this.logChangeInput("body")}
-              onKeyPress={this._handleKeyPress}
+              onKeyPress={this._handleInputKeyPress}
               multiLine={false}
               style={{marginLeft: 10}}
             />
