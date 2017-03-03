@@ -27,7 +27,7 @@ const Root = ({ store }) => {
 
   const _redirectToGeneral = (nextState, replace) => {
     replace('/rooms/General');
-  }
+  };
 
   const setMessageSocket = room => {
     window.App.channel = window.App.cable.subscriptions.create({
@@ -38,7 +38,7 @@ const Root = ({ store }) => {
         store.dispatch(receiveMessage(data));
       }
     });
-  }
+  };
 
   const setRoomSocket = () => {
     window.App.roomNames = window.App.cable.subscriptions.create({
@@ -51,7 +51,7 @@ const Root = ({ store }) => {
         console.log(data);
       }
     });
-  }
+  };
 
   const handleSocket = (nextState, replace) => {
     let room = nextState.params.room;
@@ -67,12 +67,12 @@ const Root = ({ store }) => {
       window.App.cable.subscriptions.remove(window.App.roomNames);
     }
     setRoomSocket();
-  }
+  };
 
   return (
     <Provider store={ store }>
       <MuiThemeProvider>
-        <Router history={ hashHistory } onUpdate={() => window.scrollTo(0, 0)}>
+        <Router history={ hashHistory } >
           <Route path="/" component={ App } onEnter={ _redirectToGeneral }>
             <IndexRoute component={ GreetingContainer } />
             <Route path="login" component={ SessionFormContainer } onEnter={ _redirectIfLoggedIn } />
