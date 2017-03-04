@@ -15,7 +15,7 @@
   left: 50%;
   top: 50%;
   width: 220px;
-  height: 200px;
+  height: 290px;
   overflow: scroll;
   border: 1px solid #ccc;
   background-color: #fff;
@@ -118,8 +118,10 @@ button.entrance {
 	padding: 6px 24px;
 	text-decoration: none;
   font-size: 100%;
-  position: relative;
   width: 120px;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
 }
 
 button.demo {
@@ -131,5 +133,7 @@ button.demo {
 	padding: 6px 20px;
 	text-decoration: none;
   font-size: 100%;
-  position: relative;
+  position: absolute;
+  bottom: 20px;
+  left: 150px;
 }

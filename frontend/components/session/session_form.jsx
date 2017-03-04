@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
 import Modal from 'react-modal';
+import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
 
 class SessionForm extends React.Component {
   constructor(props){
@@ -35,24 +37,6 @@ class SessionForm extends React.Component {
     return e => this.setState({ [property]: e.target.value });
   }
 
-  renderErrors(){
-    if (this.props.errors.length > 0) {
-    return(
-      <div className="errors">
-        <ul className="errors">
-          {this.props.errors.map((error, i) => (
-            <li key={`error-${i}`}>
-              {error}
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-    } else {
-      return null;
-    }
-  }
-
   closeModal() {
     this.props.clearSessionErrors();
     this.setState({ modalOpen: false });
@@ -60,7 +44,7 @@ class SessionForm extends React.Component {
   }
 
   openModal() {
-    this.redirect('/')
+    this.redirect('/');
     this.setState({ modalOpen: true });
   }
 
@@ -85,7 +69,6 @@ class SessionForm extends React.Component {
     return(
       <div className="main">
         <div id='greeting'>
-          {this.renderErrors()}
           <Modal
             isOpen={this.state.modalOpen}
             onRequestClose={this.closeModal}
@@ -98,12 +81,12 @@ class SessionForm extends React.Component {
               <form onSubmit={this.handleSubmit}>
                 <hr/>
                 <div className='entrance flex'>
-                  <div><Link to='login' className='login' onClick={this.props.clearSessionErrors} activeClassName="activeEntranceLink">Login</Link></div>
-                  <div><Link to='signup' className='signup' onClick={this.props.clearSessionErrors} activeClassName="activeEntranceLink">Sign Up</Link></div>
+                  <div><FlatButton label="Login" onClick={() => this.redirect('login')} /></div>
+                  <div><FlatButton label="Signup" onClick={() => this.redirect('signup')} /></div>
                 </div>
                 <hr/>
-                <input className="session" autoFocus type="text" placeholder="Username" value={this.state.username} onChange={this.updateProperty('username')} required/>
-                <input className="session" type="password" placeholder="Password" value={this.state.password} onChange={this.updateProperty('password')} required/>
+                <TextField style={{width: 200}} autoFocus hintText="Enter Username" floatingLabelText="Username" value={this.state.username} onChange={this.updateProperty('username')} required /><br />
+                <TextField style={{width: 200}} errorText={this.props.errors.join(" and ")} hintText="Enter Password" floatingLabelText="Password" type="password" value={this.state.password} onChange={this.updateProperty('password')} required /><br />
                 <div className="entrance flex">
                   <div><button className='entrance' value="Sign In" onClick={this.handleSubmit}>{buttonText}</button></div>
                   <div><button className='demo' value="DEMO" onClick={this.demoLogin}>DEMO</button></div>

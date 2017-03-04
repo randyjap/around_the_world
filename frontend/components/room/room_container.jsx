@@ -5,7 +5,8 @@ import { postRoom } from '../../actions/room_actions';
 
 const mapStateToProps = state => ({
   messages: state.currentRoom.messages,
-  rooms: state.rooms
+  rooms: state.rooms,
+  username: state.session.currentUser.username
 });
 
 const mapDispatchToProps = dispatch => ({

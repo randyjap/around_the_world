@@ -88,7 +88,7 @@ class Room extends React.Component{
           <CardText>
           </CardText>
         </Card>
-      )
+      );
     } else {
       messages = Object.keys(messages).map(key => messages[key]);
       messages = messages.map(message => {
@@ -104,19 +104,19 @@ class Room extends React.Component{
             </CardText>
           </Card>
         );
-      })
+      });
     }
 
     let rooms = this.props.rooms;
     if (rooms === null) {
-      <MenuItem>No Rooms Yet!</MenuItem>
+      <MenuItem>No Rooms Yet!</MenuItem>;
     } else {
       rooms = Object.keys(rooms).map(key => rooms[key]);
       rooms = rooms.map(room => {
         return (
           <MenuItem key={room.id} onTouchTap={() => this.redirect(`rooms/${room.name}`)}>{room.name}</MenuItem>
         );
-      })
+      });
     }
 
 
@@ -126,6 +126,13 @@ class Room extends React.Component{
           <div className="middle-left">
             <Drawer width={200} open={true}>
               <Subheader>Welcome to {this.props.routeParams.room}</Subheader>
+              <Divider />
+              <List>
+                <MenuItem onTouchTap={() => this.redirect("/")}>
+                  <Avatar style={{position: "relative", top: 14, marginRight: 10}} src="http://www.randyjap.com/images/avatar.jpg" />
+                   Logout</MenuItem>
+              </List>
+              <Divider />
               {rooms}
               <TextField
                 style={{paddingLeft: "10px", width: "170px"}}
