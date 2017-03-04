@@ -3,6 +3,11 @@ User.create!(
   password: "password"
 )
 
+User.create!(
+  username: "Guest",
+  password: "password"
+)
+
 10.times do
   User.create!(
     username: Faker::Name.name,
