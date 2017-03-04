@@ -31,7 +31,7 @@ class Greeting extends React.Component{
       <div className="main-splash">
         <FlatButton style={style} label="Login to Real Time Chat" onClick={() => this.redirect('login')} />
         <div style={style_2}>
-          <a href="https://www.github.com/randyjap" target="_blank">
+          <a href="https://github.com/randyjap/around_the_world" target="_blank">
             <img className="social-links" src="http://res.cloudinary.com/dkympkwdz/image/upload/v1484853612/GitHub-Mark-64px_rfmfmn.png" />
           </a>
           <a href="http://www.randyjap.com/" target="_blank">
