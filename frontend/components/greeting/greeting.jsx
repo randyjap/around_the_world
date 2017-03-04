@@ -24,7 +24,8 @@ class Greeting extends React.Component{
       width: "100%",
       textAlign: "center",
       position: "absolute",
-      bottom: 0
+      bottom: 0,
+      background: "rgba(180, 174, 174, 0.7)"
     };
 
     return (
@@ -38,7 +39,7 @@ class Greeting extends React.Component{
             <img className="social-links" style={{width: 60}} src="http://res.cloudinary.com/dkympkwdz/image/upload/v1488599480/portrait_icon_dwxaiv.png" />
           </a>
           <a href="https://www.linkedin.com/in/randyjap" target="_blank">
-            <img className="social-links" src="http://res.cloudinary.com/dkympkwdz/image/upload/v1484853581/Logo-2C-21px-R_rc35uu.png" />
+            <img className="social-links linked-in" src="http://res.cloudinary.com/dkympkwdz/image/upload/v1484853581/Logo-2C-21px-R_rc35uu.png" />
           </a>
         </div>
       </div>
