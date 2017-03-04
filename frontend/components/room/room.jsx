@@ -39,8 +39,8 @@ class Room extends React.Component{
   }
 
   handleLogout(){
-    this.props.logout();
-    this.redirect('/');
+    this.props.logout()
+      .then(() => this.redirect('/'));
   }
 
   scrollToBottom(){
@@ -124,7 +124,6 @@ class Room extends React.Component{
       });
     }
 
-
     return (
       <div className="room">
         <div className="middle">
@@ -133,7 +132,7 @@ class Room extends React.Component{
               <Subheader>Welcome to {this.props.routeParams.room}</Subheader>
               <Divider />
               <List>
-                <MenuItem onTouchTap={() => this.handleLogout()}>
+                <MenuItem onTouchTap={this.handleLogout}>
                   <Avatar style={{position: "relative", top: 14, marginRight: 10}} src="http://www.randyjap.com/images/avatar.jpg" />
                    Logout</MenuItem>
               </List>

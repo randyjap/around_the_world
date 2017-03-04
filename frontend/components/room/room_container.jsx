@@ -7,8 +7,7 @@ import { logout } from '../../actions/session_actions';
 
 const mapStateToProps = state => ({
   messages: state.currentRoom.messages,
-  rooms: state.rooms,
-  username: state.session.currentUser.username
+  rooms: state.rooms
 });
 
 const mapDispatchToProps = dispatch => ({
