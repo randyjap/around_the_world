@@ -25,7 +25,7 @@ class Room extends React.Component{
     this.logChangeInput = this.logChangeInput.bind(this);
     this.postMessage = this.postMessage.bind(this);
     this.redirect = this.redirect.bind(this);
-
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   componentDidUpdate(nextState){
@@ -36,6 +36,11 @@ class Room extends React.Component{
         this.scrollToBottom();
       }
     }
+  }
+
+  handleLogout(){
+    this.props.logout();
+    this.redirect('/');
   }
 
   scrollToBottom(){
@@ -128,7 +133,7 @@ class Room extends React.Component{
               <Subheader>Welcome to {this.props.routeParams.room}</Subheader>
               <Divider />
               <List>
-                <MenuItem onTouchTap={() => this.redirect("/")}>
+                <MenuItem onTouchTap={() => this.handleLogout()}>
                   <Avatar style={{position: "relative", top: 14, marginRight: 10}} src="http://www.randyjap.com/images/avatar.jpg" />
                    Logout</MenuItem>
               </List>

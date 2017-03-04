@@ -21,7 +21,7 @@ const Root = ({ store }) => {
   const _redirectIfLoggedIn = (nextState, replace) => {
     const currentUser = store.getState().session.currentUser;
     if (currentUser) {
-      replace('/');
+      replace('/rooms/General');
     }
   };
 
@@ -79,7 +79,7 @@ const Root = ({ store }) => {
             <Route path="signup" component={ SessionFormContainer } onEnter={ _redirectIfLoggedIn } />
             <Route path="room" component={ RoomContainer } />
           </Route>
-          <Route path="/rooms" component={ Rooms }>
+          <Route path="/rooms" component={ Rooms } onEnter={ _ensureLoggedIn }>
             <Route path=":room" component={ RoomContainer } onEnter={ handleSocket.bind(this) }/>
           </Route>
         </Router>

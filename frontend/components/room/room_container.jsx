@@ -2,6 +2,8 @@ import { connect } from 'react-redux';
 import Room from './room';
 import { postMessage } from '../../actions/message_actions';
 import { postRoom } from '../../actions/room_actions';
+import { logout } from '../../actions/session_actions';
+
 
 const mapStateToProps = state => ({
   messages: state.currentRoom.messages,
@@ -11,7 +13,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   postMessage: message => dispatch(postMessage(message)),
-  postRoom: room => dispatch(postRoom(room))
+  postRoom: room => dispatch(postRoom(room)),
+  logout: () => dispatch(logout())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Room);

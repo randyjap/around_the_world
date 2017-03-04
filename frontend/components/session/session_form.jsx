@@ -29,7 +29,7 @@ class SessionForm extends React.Component {
     e.preventDefault();
     const user = this.state;
     this.props.processForm({user})
-      .then(() => this.redirect('/')
+      .then(() => this.redirect('/rooms/General')
     );
   }
 
@@ -58,7 +58,7 @@ class SessionForm extends React.Component {
       if (counter === username.length) {
         this.setState({ password });
         clearInterval(animation);
-        this.props.login({user: {username, password} }).then(() => this.redirect('/'));
+        this.props.login({user: {username, password} }).then(() => this.redirect('/rooms/General'));
       }
     };
     const animation = setInterval(typer, 70);
