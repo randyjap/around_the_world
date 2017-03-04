@@ -164,6 +164,7 @@ class Room extends React.Component{
               onChange={this.logChangeInput("body")}
               onKeyPress={this._handleInputKeyPress}
               multiLine={false}
+              fullWidth={true}
               style={{marginLeft: 10}}
             />
           </div>
