@@ -5,7 +5,7 @@ class Api::MessagesController < ApplicationController
   end
 
   def create
-    user = User.first
+    user = current_user
     room = Room.find_by(name: params[:room])
     body = params[:body]
     @message = Message.new(author: user, room: room, body: body)
